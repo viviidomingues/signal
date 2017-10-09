@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+	<h:head>
+		<title><h:outputText value="Controle de sinais" /></title>
+	</h:head>
+	<body>
+		<h:form>
+			<table>
+				<tr>
+					<td><h:outputText value="Identifier" /></td>
+					<td><h:inputText
+							value="#{controllerGroup.signalGroup.identifier}" required="true"
+							requiredMessage="O Identificador é obrigatório" /></td>
+				</tr>
+				<tr>
+					<td><h:commandButton value="Salvar"
+							action="#{controllerGroup.saveSignalGroup}" /></td>
+				</tr>
+			</table>
+		</h:form>
+		<h:form>
+
+			<h:dataTable value="#{controllerGroup.signalGroups}" var="group"
+				rendered="#{not empty controllerGroup.signalGroups}" border="1">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="ID" />
+					</f:facet>
+					<h:outputText value="#{group.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Identifier" />
+					</f:facet>
+					<h:outputText value="#{group.identifier}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Delete" />
+					</f:facet>
+					<h:commandButton value="Delete" immediate="true"
+						actionListener="#{controllerGroup.delete}">
+						<f:param name="id" value="#{group.id}" />
+					</h:commandButton>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Edit" />
+					</f:facet>
+					<h:commandButton value="Edit" immediate="true"
+						actionListener="#{controllerGroup.editSignalGroup}">
+						<f:param name="id" value="#{group.id}" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			<h:link outcome="IndexSignal" value="Page 1" />
+		</h:form>
+	</body>
+</f:view>
+
+</html>
