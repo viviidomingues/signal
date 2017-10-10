@@ -20,7 +20,7 @@ public class Signal implements Serializable{
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -28,7 +28,7 @@ public class Signal implements Serializable{
 	}
 
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(String address) {
@@ -36,7 +36,7 @@ public class Signal implements Serializable{
 	}
 
 	public String getDetails() {
-		return details;
+		return this.details;
 	}
 
 	public void setDetails(String details) {
@@ -44,7 +44,7 @@ public class Signal implements Serializable{
 	}
 
 	public Boolean getActive() {
-		return active;
+		return this.active;
 	}
 
 	public void setActive(Boolean active) {

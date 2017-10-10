@@ -42,10 +42,10 @@ public class ControllerGroup implements Serializable {
 
 	public String saveSignalGroup() {
 		String identifier = signalGroup.getIdentifier();
-		Boolean verifica = verifyExistingSignal(identifier);
-		System.out.println(verifica);
+		Boolean verify = verifyExistingSignal(identifier);
+		System.out.println(verify);
 		
-		if (verifica != true){
+		if (verify != true){
 			if (this.groupIdentifier != null) {
 				SignalGroup group = new SignalGroup();
 				group.setIdentifier(this.groupIdentifier);
@@ -57,7 +57,8 @@ public class ControllerGroup implements Serializable {
 				this.signalGroup = new SignalGroup();
 			}
 		} else {
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Grupo já cadastrado", identifier)); 
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Grupo já cadastrado", identifier));
+			 this.reset();
 		}
 
 		

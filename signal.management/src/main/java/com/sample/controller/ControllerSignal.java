@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import com.sample.dao.SignalDao;
@@ -51,32 +52,55 @@ public class ControllerSignal implements Serializable {
 	}
 
 	public String saveSignal() {
+		String address = signal.getAddress();
+		System.out.println(address);
+		Boolean verify = verifyExistingAddress(address);
+		System.out.println(verify);
 		
-		
-		if (this.signalAddress != null && this.signalDetails != null && this.groupId != null) {
-
-			Signal signal = new Signal();
-			signal.setAddress(this.signalAddress);
-			signal.setDetails(this.signalDetails);
-			signal.setActive(this.signalActive);
-			SignalGroup group = this.signalGroupDao.getById(this.groupId);
-			signal.setSignalGroup(group);
+		if (verify != true) {
 			
-			this.signalDao.save(signal);
+			if (this.signalAddress != null && this.signalDetails != null && this.groupId != null) {
+				Signal signal = new Signal();
+				signal.setAddress(this.signalAddress);
+				signal.setDetails(this.signalDetails);
+				signal.setActive(this.signalActive);
+				SignalGroup group = this.signalGroupDao.getById(this.groupId);
+				signal.setSignalGroup(group);
 
-			this.reset();
-		} else {
-			this.signalDao.save(signal);
-			this.signal = new Signal();
-			
+				this.signalDao.save(signal);
+
+				this.reset();
+			} else {
+				this.signalDao.save(signal);
+				this.signal = new Signal();
+
+			}
+
+			} else {
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Tag já cadastrada", address));
+			 this.reset();
 		}
-		return null;
+
+	return null;
+
+	}
+
+	private Boolean verifyExistingAddress(String address) {
+		boolean result = false;
+		for (Signal signal : getSignals()) {
+			if (signal.getAddress().equals(address)) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 	public String editSignal() {
 		Long id = this.getIdParameter();
+		
 		if (id != null) {
-			this.signalForEdit = this.signalDao.getById(id);
+			System.out.println(id);
+			this.signal = this.signalDao.getById(id);
 			if (this.signalForEdit != null) {
 				if (this.signalForEdit.getSignalGroup() != null) {
 					this.groupId = this.signalForEdit.getSignalGroup().getId();
@@ -176,7 +200,5 @@ public class ControllerSignal implements Serializable {
 	public void setSignalForEdit(Signal signalForEdit) {
 		this.signalForEdit = signalForEdit;
 	}
-	
-	
 
 }

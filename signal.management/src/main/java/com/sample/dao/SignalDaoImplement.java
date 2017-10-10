@@ -10,8 +10,9 @@ import com.sample.model.Signal;
 public class SignalDaoImplement implements SignalDao {
 
 	private static SignalDaoImplement INSTANCE = new SignalDaoImplement();
-	private static Map<Long, Signal> database = new HashMap<Long, Signal>();
-	private static Long nextId = 0L;
+	
+	private Map<Long, Signal> database = new HashMap<Long, Signal>();
+	private Long nextId = 0L;
 
 	private SignalDaoImplement() {
 	}
