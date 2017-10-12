@@ -101,7 +101,7 @@
 						<h:outputText value="Edit" />
 					</f:facet>
 					<h:commandButton value="Edit" immediate="true"
-						action="#{controllerSignal.editSignal}">
+						actionListener="#{controllerSignal.editSignal}">
 						<f:param name="id" value="#{signal.id}" />
 					</h:commandButton>
 				</h:column>

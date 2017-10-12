@@ -1,6 +1,7 @@
 package com.sample.controller;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,41 +38,49 @@ public class ControllerGroup implements Serializable {
 	}
 
 	private void reset() {
+		this.groupId = null;
 		this.groupIdentifier = null;
 	}
 
 	public String saveSignalGroup() {
-		String identifier = signalGroup.getIdentifier();
-		Boolean verify = verifyExistingSignal(identifier);
-		System.out.println(verify);
+		String identifier = this.groupIdentifier;
+		Boolean verify = verifyExistingGroup(identifier);
 		
-		if (verify != true){
-			if (this.groupIdentifier != null) {
+		System.out.println( "group save: " +   identifier + " group id: " + this.groupId + " " + verify);
+
+		if (verify != true) {
+			
+			if (identifier != null) {
 				SignalGroup group = new SignalGroup();
 				group.setIdentifier(this.groupIdentifier);
+				group.setId(this.groupId);
+				
 				this.signalGroupDao.save(group);
-
 				this.reset();
 			} else {
 				this.signalGroupDao.save(signalGroup);
 				this.signalGroup = new SignalGroup();
+				this.reset();
 			}
 		} else {
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Grupo já cadastrado", identifier));
-			 this.reset();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupo já cadastrado", identifier));
 		}
 
-		
+		this.reset();
 		return null;
 	}
 
-	public boolean verifyExistingSignal(String identifier) {
+	public boolean verifyExistingGroup(String identifier) {
 		boolean result = false;
+	
 		for (SignalGroup groups : getSignalGroups()) {
-			if (groups.getIdentifier().equals(identifier)) {
+			if (groups.getIdentifier().equals(identifier)){
 				result = true;
 			}
 		}
+		
+		System.out.println("verify " + result);
 		return result;
 	}
 
@@ -79,11 +88,14 @@ public class ControllerGroup implements Serializable {
 		Long id = this.getIdParameter();
 		if (id != null) {
 			this.signalGroup = this.signalGroupDao.getById(id);
+			if(this.signalGroup != null){
+				this.groupId = this.signalGroup.getId();
+				this.groupIdentifier = this.signalGroup.getIdentifier();
+			}
 		}
-
 		return null;
 	}
-
+	
 	public void delete() {
 		Long id = this.getIdParameter();
 		this.signalGroupDao.delete(id);
