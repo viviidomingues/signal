@@ -12,12 +12,12 @@
 				<tr>
 					<td><h:outputText value="Identifier" /></td>
 					<td><h:inputText
-							value="#{controllerGroup.signalGroup.identifier}" required="true"
+							value="#{controllerGroup.groupIdentifier}" required="true"
 							requiredMessage="O Identificador é obrigatório" /></td>
 				</tr>
 				<tr>
 					<td><h:commandButton value="Salvar"
-							action="#{controllerGroup.saveSignalGroup}" /></td>
+							actionListener="#{controllerGroup.saveSignalGroup}" type="submit"/></td>
 				</tr>
 			</table>
 		</h:form>

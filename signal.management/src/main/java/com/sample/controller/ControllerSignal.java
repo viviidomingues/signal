@@ -55,12 +55,13 @@ public class ControllerSignal implements Serializable {
 	public String saveSignal() {
 		String address = this.signalAddress;
 		Boolean verify = verifyExistingAddress(address, this.groupId);
-
+		System.out.println(address + " " + verify + " " + getGroupId());
+ 
 		
 		if (verify != true) {
 
 			if (address != null && this.signalDetails != null && this.groupId != null) {
-				Signal signal = new Signal();
+				this.signal = new Signal();
 				signal.setId(this.signalId);
 				signal.setAddress(address);
 				signal.setDetails(this.signalDetails);
@@ -132,6 +133,11 @@ public class ControllerSignal implements Serializable {
 			}
 		}
 		return null;
+	}
+	
+	public void delete() {
+		Long id = this.getIdParameter();
+		this.signalGroupDao.delete(id);
 	}
 
 	private Long getIdParameter() {
