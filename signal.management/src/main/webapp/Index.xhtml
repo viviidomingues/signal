@@ -5,26 +5,26 @@
 <f:view>
 	<h:head>
 		<title><h:outputText value="Controle de sinais" /></title>
+		<link rel="stylesheet" type="text/css" href="Estilo.css" />
 	</h:head>
 	<body>
 		<h:form>
 			<table>
 				<tr>
 					<td><h:outputText value="Identifier" /></td>
-					<td><h:inputText
-							value="#{controllerGroup.groupIdentifier}" required="true"
-							requiredMessage="O Identificador é obrigatório" /></td>
-				</tr>
-				<tr>
+					<td><h:inputText value="#{controllerGroup.groupIdentifier}"
+							required="true" requiredMessage="O Identificador é obrigatório" /></td>
 					<td><h:commandButton value="Salvar"
-							actionListener="#{controllerGroup.saveSignalGroup}" type="submit"/></td>
+							actionListener="#{controllerGroup.saveSignalGroup}" type="submit" /></td>
 				</tr>
 			</table>
 		</h:form>
-		
+
 		<h:form>
 			<h:dataTable value="#{controllerGroup.signalGroups}" var="group"
-				rendered="#{not empty controllerGroup.signalGroups}" border="1">
+				rendered="#{not empty controllerGroup.signalGroups}"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row" align="center">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="ID" />
