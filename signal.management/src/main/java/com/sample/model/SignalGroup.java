@@ -6,7 +6,7 @@ public class SignalGroup {
 	private String identifier;
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -14,7 +14,7 @@ public class SignalGroup {
 	}
 
 	public String getIdentifier() {
-		return identifier;
+		return this.identifier;
 	}
 
 	public void setIdentifier(String identifier) {

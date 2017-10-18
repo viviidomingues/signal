@@ -12,7 +12,7 @@ public class Signal implements Serializable{
 	private Boolean active;
 
 	public SignalGroup getSignalGroup() {
-		return signalGroup;
+		return this.signalGroup;
 	}
 
 	public void setSignalGroup(SignalGroup signalGroup) {

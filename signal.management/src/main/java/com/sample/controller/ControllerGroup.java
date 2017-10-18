@@ -43,20 +43,17 @@ public class ControllerGroup implements Serializable {
 		String identifier = this.groupIdentifier;
 		Boolean verify = verifyExistingGroup(identifier);
 		
-		System.out.println("identifier " + groupIdentifier);
-
 		if (verify != true) {
 
 			if (identifier != null) {
 				SignalGroup group = new SignalGroup();
 				group.setIdentifier(this.groupIdentifier);
 				group.setId(this.groupId);
-				System.out.println("identifier " + groupIdentifier + " id " + groupId);
 
 				this.signalGroupDao.save(group);
 				this.reset();
 			} else {
-				this.signalGroupDao.save(signalGroup);
+				this.signalGroupDao.save(this.signalGroup);
 				this.signalGroup = new SignalGroup();
 				this.reset();
 			}
@@ -108,7 +105,7 @@ public class ControllerGroup implements Serializable {
 	}
 
 	public SignalGroup getSignalGroup() {
-		return signalGroup;
+		return this.signalGroup;
 	}
 
 	public void setSignalGroup(SignalGroup signalGroup) {
@@ -116,7 +113,7 @@ public class ControllerGroup implements Serializable {
 	}
 
 	public Long getGroupId() {
-		return groupId;
+		return this.groupId;
 	}
 
 	public void setGroupId(Long groupId) {
@@ -124,7 +121,7 @@ public class ControllerGroup implements Serializable {
 	}
 
 	public String getGroupIdentifier() {
-		return groupIdentifier;
+		return this.groupIdentifier;
 	}
 
 	public void setGroupIdentifier(String groupIdentifier) {

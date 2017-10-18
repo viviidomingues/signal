@@ -10,6 +10,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.Version;
 
 import com.sample.dao.SignalDao;
 import com.sample.dao.SignalDaoImplement;
@@ -55,8 +56,7 @@ public class ControllerSignal implements Serializable {
 	public String saveSignal() {
 		String address = this.signalAddress;
 		Boolean verify = verifyExistingAddress(address, this.groupId);
-		System.out.println(address + " " + verify + " " + getGroupId());
- 
+		System.out.println("verify " + verify);
 		
 		if (verify != true) {
 
@@ -89,7 +89,7 @@ public class ControllerSignal implements Serializable {
 	private Boolean verifyExistingAddress(String address, Long id) {
 		boolean result = false;
 		for (Signal signals : getSignals()) {
-			if (signals.getAddress().equals(address) && signals.getId() != id) {
+			if (signals.getAddress().equals(address)) {
 				result = true;
 			}
 		}
