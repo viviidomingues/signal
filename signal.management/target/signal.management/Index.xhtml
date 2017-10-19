@@ -5,26 +5,29 @@
 <f:view>
 	<h:head>
 		<title><h:outputText value="Controle de sinais" /></title>
+		<link rel="stylesheet" type="text/css" href="teste.css" />
 	</h:head>
 	<body>
 		<h:form>
 			<table>
 				<tr>
 					<td><h:outputText value="Identifier" /></td>
-					<td><h:inputText
-							value="#{controllerGroup.groupIdentifier}" required="true"
-							requiredMessage="O Identificador é obrigatório" /></td>
-				</tr>
-				<tr>
+					<td><h:inputText value="#{controllerGroup.groupIdentifier}"
+							required="true" requiredMessage="O Identificador é obrigatório" /></td>
 					<td><h:commandButton value="Salvar"
-							actionListener="#{controllerGroup.saveSignalGroup}" type="submit"/></td>
+							actionListener="#{controllerGroup.saveSignalGroup}" type="submit" /></td>
 				</tr>
 			</table>
+			<h:link outcome="IndexSignal" value="Cadastro de sinal" />
 		</h:form>
-		
+
 		<h:form>
 			<h:dataTable value="#{controllerGroup.signalGroups}" var="group"
-				rendered="#{not empty controllerGroup.signalGroups}" border="1">
+				rendered="#{not empty controllerGroup.signalGroups}"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row" align="center"
+				paginator="true" rows="10" lazy="true"
+				paginatorAlwaysVisible="true" paginatorPosition="bottom">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="ID" />
@@ -55,8 +58,8 @@
 						<f:param name="id" value="#{group.id}" />
 					</h:commandButton>
 				</h:column>
+
 			</h:dataTable>
-			<h:link outcome="IndexSignal" value="Page 1" />
 		</h:form>
 	</body>
 </f:view>
