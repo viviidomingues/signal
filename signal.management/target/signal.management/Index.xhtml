@@ -5,7 +5,8 @@
 <f:view>
 	<h:head>
 		<title><h:outputText value="Controle de sinais" /></title>
-		<link rel="stylesheet" type="text/css" href="teste.css" />
+		<link type="text/css" href="teste.css" rel="stylesheet" />	
+	<script type="text/javascript" src="paging.js"></script>
 	</h:head>
 	<body>
 		<h:form>
@@ -22,12 +23,10 @@
 		</h:form>
 
 		<h:form>
-			<h:dataTable value="#{controllerGroup.signalGroups}" var="group"
+			<h:dataTable  id="tb1" value="#{controllerGroup.signalGroups}" var="group"
 				rendered="#{not empty controllerGroup.signalGroups}"
 				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row" align="center"
-				paginator="true" rows="10" lazy="true"
-				paginatorAlwaysVisible="true" paginatorPosition="bottom">
+				rowClasses="order-table-odd-row,order-table-even-row">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="ID" />
@@ -58,9 +57,15 @@
 						<f:param name="id" value="#{group.id}" />
 					</h:commandButton>
 				</h:column>
-
 			</h:dataTable>
 		</h:form>
+		<div id="pageNav"></div>
+    <script>
+        var pager = new Pager('tb1', 2); 
+        pager.init(); 
+        pager.showPageNav('pager', 'pageNav'); 
+        pager.showPage(1);
+    </script>		
 	</body>
 </f:view>
 
