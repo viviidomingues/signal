@@ -131,5 +131,10 @@ public class ControllerGroup implements Serializable {
 	public List<SignalGroup> getSignalGroups() {
 		return this.signalGroupDao.findAll();
 	}
+	
+	public void campoVazio(){
+		FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("O Identificador obrigatorio"));
+	}
 
 }
