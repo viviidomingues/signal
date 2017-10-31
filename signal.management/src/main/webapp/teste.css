@@ -1,0 +1,97 @@
+label {
+	font-size: 20px;
+}
+
+#inputData {
+	position: absolute;
+	float: left;
+	width: 1480px;
+	height: 100px;
+}
+
+#labelIdentifier {
+	position: relative;
+	top: 25px;
+	float: left;
+	left: 5px;
+	width: 100px;
+	height: 25px;
+}
+
+#inputIdentifier {
+	position: relative;
+	top: 20px;
+	float: left;
+	width: 100px;
+	height: 25px;
+}
+
+#buttonSave {
+	position: relative;
+	top: 18px;
+	float: left;
+	left: 150px;
+	width: 100px;
+	height: 25px;
+}
+
+#linkCadastroSinais {
+	position: relative;
+	top: 18px;
+	float: left;
+	left: 1000px;
+	width: 100px;
+	height: 25px;
+}
+
+#saidaDados {
+	position: absolute;
+	top: 130px;
+}
+
+#inputAddress {
+	position: relative;
+	top: 20px;
+	float: left;
+	left: 20px;
+}
+
+#inputDetails {
+	position: relative;
+	top: 40px;
+	clear: both;
+	left: 20px;
+}
+
+#inputActive {
+	position: absolute;
+	top: 15px;
+	float: left;
+	left: 380px;
+}
+
+#menuGroup {
+	position: relative;
+	top: 5px;
+	clear: both;
+	left: 380px;
+	width: 365px;
+	height: 70px;
+}
+
+#buttonSaveSignal {
+	position: absolute;
+	top: 30px;
+	float: left;
+	left: 700px;
+}
+
+.MyOneMenu.ui-selectoneradio label{
+	font-size: 17px;
+	color: black;
+}
+
+.MyOneMenu.ui-selectonemenu label {
+	font-size: 17px;
+	color: black;
+}

@@ -1,113 +1,119 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view>
-	<h:head>
-		<title><h:outputText value="Controle de sinais" /></title>
-	</h:head>
-	<body>
-		<h:form id="registerForm">
-			<table>
-				<tr>
-					<td><h:outputText value="Endereço" /></td>
-					<td><h:inputText value="#{controllerSignal.signalAddress}"
-							required="true"
-							requiredMessage="O endereço do sinal é obrigatório" /></td>
-				</tr>
-				<tr>
-					<td><h:outputText value="Detalhes" /></td>
-					<td><h:inputText value="#{controllerSignal.signalDetails}"
-							required="true"
-							requiredMessage="O detalhe do sinal é obrigatório" /></td>
-				</tr>
-				<tr>
-					<td><h:outputText value="Ativo" /></td>
-					<td><h:selectOneRadio value="#{controllerSignal.signalActive}">
-							<f:selectItem itemValue="true" itemLabel="True" />
-							<f:selectItem itemValue="false" itemLabel="False" />
-						</h:selectOneRadio></td>
-				</tr>
-				<tr>
-					<td><h:outputText value="Group" /></td>
-					<td><h:selectOneMenu id="signalGroup" required="true"
-							requiredMessage="O grupo é obrigatório"
-							value="#{controllerSignal.groupId}" converter="javax.faces.Long">
-							<f:selectItem noSelectionOption="true"
-								itemLabel="Selecione um grupo" />
-							<f:selectItems var="group"
-								value="#{controllerSignal.signalGroups}"
-								itemLabel="#{group.identifier}" itemValue="#{group.id}" />
-						</h:selectOneMenu></td>
-				</tr>
-				<tr>
-					<td><h:commandButton value="Salvar"
-							action="#{controllerSignal.saveSignal}" type="submit"/></td>
-				</tr>
-			</table>
-		</h:form>
+<h:head>
+	<title><h:outputText value="Controle de sinais" /></title>
+	<link rel="stylesheet" type="text/css" href="teste.css" />
+</h:head>
+<body>
+	<h:form id="registerForm">
+		<p:messages id="mensagem" />
+		<div id="inputData">
 
-		<h:form id="listForm">
+			<div id="inputAddress">
+				<h:outputLabel value="Endereço: " />
+				<p:inputText value="#{controllerSignal.signalAddress}"
+					required="true" requiredMessage="O endereço do sinal é obrigatório" />
+			</div>
 
-			<h:dataTable value="#{controllerSignal.signals}" var="signal"
-				rendered="#{not empty controllerSignal.signals}" border="1">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Endereço" />
-					</f:facet>
-					<h:outputText value="#{signal.address}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="ID Sinal" />
-					</f:facet>
-					<h:outputText value="#{signal.id}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Detalhes" />
-					</f:facet>
-					<h:outputText value="#{signal.details}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Ativo" />
-					</f:facet>
-					<h:outputText value="ativo" rendered="#{signal.active}" />
-					<h:outputText value="desativado" rendered="#{not signal.active}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Grupo" />
-					</f:facet>
-					<h:outputText value="#{signal.signalGroup.identifier}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Ativar" />
-					</f:facet>
-					<h:commandButton value="ativar" rendered="#{not signal.active}"
-						actionListener="#{controllerSignal.active}" immediate="true">
-						<f:param name="id" value="#{signal.id}" />
-					</h:commandButton>
-					<h:commandButton value="desativar" rendered="#{signal.active}"
-						actionListener="#{controllerSignal.desactive}" immediate="true"
-						name="id">
-						<f:param name="id" value="#{signal.id}" />
-					</h:commandButton>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Edit" />
-					</f:facet>
-					<h:commandButton value="Edit" immediate="true"
-						actionListener="#{controllerSignal.editSignal}">
-						<f:param name="id" value="#{signal.id}" />
-					</h:commandButton>
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</body>
-</f:view>
+			<div id="inputDetails">
+				<h:outputLabel value="Detalhes: " />
+				<p:inputText value="#{controllerSignal.signalDetails}"
+					required="true" requiredMessage="O detalhe do sinal é obrigatório" />
+			</div>
+
+			<div id="inputActive">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="radioActive" value="Ativo:" />
+					<p:selectOneRadio id="radioActive" styleClass="MyOneMenu"
+						value="#{controllerSignal.signalActive}" >
+						<f:selectItem itemValue="true" itemLabel="True"/>
+						<f:selectItem itemValue="false" itemLabel="False"/>
+					</p:selectOneRadio>
+				</h:panelGrid>
+			</div>
+
+			<div id="menuGroup">
+				<h:outputLabel value="Group: " />
+				<p:selectOneMenu id="signalGroup" required="true"
+					requiredMessage="O grupo é obrigatório"
+					value="#{controllerSignal.groupId}" converter="javax.faces.Long" styleClass="MyOneMenu">
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione um grupo" />
+					<f:selectItems var="group" value="#{controllerSignal.signalGroups}"
+						itemLabel="#{group.identifier}" itemValue="#{group.id}" />
+				</p:selectOneMenu>
+			</div>
+
+			<div id="buttonSaveSignal">
+				<p:commandButton value="Salvar"
+					actionListener="#{controllerSignal.saveSignal}" ajax="false" />
+			</div>
+		</div>
+	</h:form>
+
+	<h:form id="saidaDados">
+
+		<p:dataTable value="#{controllerSignal.signals}" var="signal"
+			rendered="#{not empty controllerSignal.signals}" border="1">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Endereço" />
+				</f:facet>
+				<h:outputText value="#{signal.address}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="ID Sinal" />
+				</f:facet>
+				<h:outputText value="#{signal.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Detalhes" />
+				</f:facet>
+				<h:outputText value="#{signal.details}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Ativo" />
+				</f:facet>
+				<h:outputText value="Ativo" rendered="#{signal.active}" />
+				<h:outputText value="Desativado" rendered="#{not signal.active}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Grupo" />
+				</f:facet>
+				<h:outputText value="#{signal.signalGroup.identifier}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Ativar" />
+				</f:facet>
+				<p:commandButton value="Ativar" rendered="#{not signal.active}"
+					actionListener="#{controllerSignal.active}" immediate="true">
+					<f:param name="id" value="#{signal.id}" />
+				</p:commandButton>
+				<p:commandButton value="Desativar" rendered="#{signal.active}"
+					actionListener="#{controllerSignal.desactive}" immediate="true"
+					name="id">
+					<f:param name="id" value="#{signal.id}" />
+				</p:commandButton>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Edit" />
+				</f:facet>
+				<p:commandButton value="Edit" immediate="true"
+					actionListener="#{controllerSignal.editSignal}">
+					<f:param name="id" value="#{signal.id}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</body>
 
 </html>

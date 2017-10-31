@@ -5,25 +5,25 @@
 
 <h:head>
 	<title><h:outputText value="Controle de sinais" /></title>
-	<link type="text/css" href="NewFile.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="teste.css" />
 </h:head>
 <body>
-	<h:form>
+	<h:form id="entradaDados">
 		<p:messages id="mensagem" />
-		<div id="entradaGrupos">
+		<div id="inputGrupos">
 		
 			<div id="labelIdentifier">
 				<h:outputLabel for="identifierGroup" value="Identifier: " />
 			</div>
 			
-			<div id="entradaIdentifier">
+			<div id="inputIdentifier">
 				<p:inputText id="identifierGroup"
 					value="#{controllerGroup.groupIdentifier}" required="true"
 					requiredMessage="O Identificador é  obrigatório" label="Identifier">
 				</p:inputText>
 			</div>
 			
-			<div id="botaoSalvar">
+			<div id="buttonSave">
 				<p:commandButton value="Salvar"
 					actionListener="#{controllerGroup.saveSignalGroup}" ajax="false" />
 			</div>
@@ -31,11 +31,10 @@
 			<div id="linkCadastroSinais">
 				<p:commandButton  action="IndexSignal" value="Cadastro de sinal" ajax="false" immediate="true"/>
 			</div>
-			
 		</div>
 	</h:form>
 
-	<h:form>
+	<h:form id="saidaDados">
 		<p:dataTable value="#{controllerGroup.signalGroups}" var="group"
 			rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
