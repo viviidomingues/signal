@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><h:outputText value="Controle de sinais" /></title>
+	<link rel="stylesheet" type="text/css" href="teste.css" />
+</h:head>
+<body>
+	<p:messages id="mensagem" />
+	<h:form id="entradaDados">
+
+		<div id="inputData">
+
+			<div id="labelIdentifier">
+				<h:outputLabel for="identifierGroup" value="Identifier: " />
+			</div>
+
+			<div id="inputIdentifier">
+				<p:inputText id="identifierGroup"
+					value="#{controllerGroup.groupIdentifier}" required="true"
+					requiredMessage="O Identificador é  obrigatório" label="Identifier">
+				</p:inputText>
+			</div>
+
+			<div id="buttonSave">
+				<p:commandButton value="Salvar"
+					actionListener="#{controllerGroup.saveSignalGroup}" ajax="false" />
+			</div>
+
+			<div id="linkCadastroSinais">
+				<p:commandButton action="IndexSignal" value="Cadastro de sinal"
+					ajax="false" immediate="true" />
+			</div>
+		</div>
+	</h:form>
+
+	<h:form id="saidaDados">
+		<p:dataTable value="#{controllerGroup.signalGroups}" var="group"
+			rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+			<p:column headerText="Id">
+				<h:outputText value="#{group.id}" />
+			</p:column>
+
+			<p:column headerText="Identifier">
+				<h:outputText value="#{group.identifier}" />
+			</p:column>
+
+			<p:column headerText="Edit">
+				<h:commandButton value="Edit" immediate="true"
+					actionListener="#{controllerGroup.editSignalGroup}">
+					<f:param name="id" value="#{group.id}" />
+				</h:commandButton>
+			</p:column>
+
+			<p:column headerText="Delete">
+				<h:commandButton value="Delete" immediate="true"
+					actionListener="#{controllerGroup.delete}">
+					<f:param name="id" value="#{group.id}" />
+				</h:commandButton>
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+</body>
+
+</html>

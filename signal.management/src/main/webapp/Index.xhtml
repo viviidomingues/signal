@@ -8,28 +8,30 @@
 	<link rel="stylesheet" type="text/css" href="teste.css" />
 </h:head>
 <body>
+	<p:messages id="mensagem" />
 	<h:form id="entradaDados">
-		<p:messages id="mensagem" />
-		<div id="inputGrupos">
-		
+
+		<div id="inputData">
+
 			<div id="labelIdentifier">
 				<h:outputLabel for="identifierGroup" value="Identifier: " />
 			</div>
-			
+
 			<div id="inputIdentifier">
 				<p:inputText id="identifierGroup"
 					value="#{controllerGroup.groupIdentifier}" required="true"
 					requiredMessage="O Identificador é  obrigatório" label="Identifier">
 				</p:inputText>
 			</div>
-			
+
 			<div id="buttonSave">
 				<p:commandButton value="Salvar"
 					actionListener="#{controllerGroup.saveSignalGroup}" ajax="false" />
 			</div>
-			
+
 			<div id="linkCadastroSinais">
-				<p:commandButton  action="IndexSignal" value="Cadastro de sinal" ajax="false" immediate="true"/>
+				<p:commandButton action="IndexSignal" value="Cadastro de sinal"
+					ajax="false" immediate="true" />
 			</div>
 		</div>
 	</h:form>

@@ -2,13 +2,58 @@ package com.sample.model;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Signal implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Persistence;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-	private SignalGroup signalGroup;
-	private String address;
+import com.sample.dao.BooleanTrueFalseConverter;
+
+@Entity
+@Table(name = "signais")
+@SuppressWarnings("serial")
+public class Signal implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
+
+	@Transient
+	private SignalGroup signalGroup;
+
+	@Column(name = "descricao")
+	private String address;
+
+	@Column(name = "informacoes")
 	private String details;
+	
+	@Column(name="tipo")
+	private String tipo;
+	
+	@Column(name="taxa")
+	private int taxa;
+	
+	@Column(name="plcid")
+	private int plcid;
+	
+	@Column(name="selecao")
+	private String selecao;
+	
+	@Column(name="valor_ativacao")
+	private int valor_ativacao;
+	
+	@Column(name="must_delete")
+	private String must_delete;
+
+	@Column(name = "ativo", columnDefinition = "char")
+	@Convert(converter = BooleanTrueFalseConverter.class)
 	private Boolean active;
 
 	public SignalGroup getSignalGroup() {
@@ -99,9 +144,53 @@ public class Signal implements Serializable{
 			return false;
 		return true;
 	}
-
 	
+	public String getTipo() {
+		return tipo;
+	}
 
-	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(int taxa) {
+		this.taxa = taxa;
+	}
+
+	public int getPlcid() {
+		return plcid;
+	}
+
+	public void setPlcid(int plcid) {
+		this.plcid = plcid;
+	}
+
+	public String getSelecao() {
+		return selecao;
+	}
+
+	public void setSelecao(String selecao) {
+		this.selecao = selecao;
+	}
+
+	public int getValor_ativacao() {
+		return valor_ativacao;
+	}
+
+	public void setValor_ativacao(int valor_ativacao) {
+		this.valor_ativacao = valor_ativacao;
+	}
+
+	public String getMust_delete() {
+		return must_delete;
+	}
+
+	public void setMust_delete(String must_delete) {
+		this.must_delete = must_delete;
+	}
 
 }

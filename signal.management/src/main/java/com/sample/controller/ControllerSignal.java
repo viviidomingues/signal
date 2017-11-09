@@ -10,6 +10,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.Column;
 import javax.persistence.Version;
 
 import com.sample.dao.SignalDao;
@@ -18,7 +19,6 @@ import com.sample.dao.SignalGroupDao;
 import com.sample.dao.SignalGroupDaoImplement;
 import com.sample.model.Signal;
 import com.sample.model.SignalGroup;
-
 
 @SuppressWarnings("serial")
 @ViewScoped
@@ -35,9 +35,16 @@ public class ControllerSignal implements Serializable {
 	private String signalDetails;
 	private Boolean signalActive;
 	private Long groupId;
+	private String tipo = "int";
+	private int taxa = 1000;
+	private int plcid = 1;
+	private String selecao = "F";
+	private int valor_ativacao = 1;
+	private String must_delete = "F";
 
 	public ControllerSignal() {
 		this.signal = new Signal();
+		System.out.println("===========" + valor_ativacao);
 	}
 
 	@PostConstruct
@@ -66,6 +73,13 @@ public class ControllerSignal implements Serializable {
 				signal.setAddress(address);
 				signal.setDetails(this.signalDetails);
 				signal.setActive(this.signalActive);
+				signal.setTipo(this.tipo);
+				signal.setTaxa(this.taxa);
+				signal.setPlcid(this.plcid);
+				signal.setSelecao(this.selecao);
+				signal.setValor_ativacao(this.valor_ativacao);
+				signal.setMust_delete(this.must_delete);
+				
 				SignalGroup group = this.signalGroupDao.getById(this.groupId);
 				signal.setSignalGroup(group);
 
@@ -133,11 +147,6 @@ public class ControllerSignal implements Serializable {
 			}
 		}
 		return null;
-	}
-	
-	public void delete() {
-		Long id = this.getIdParameter();
-		this.signalGroupDao.delete(id);
 	}
 
 	private Long getIdParameter() {

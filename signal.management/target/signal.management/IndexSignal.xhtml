@@ -8,8 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="teste.css" />
 </h:head>
 <body>
+	<p:messages id="mensagem" />
 	<h:form id="registerForm">
-		<p:messages id="mensagem" />
+
 		<div id="inputData">
 
 			<div id="inputAddress">
@@ -28,9 +29,9 @@
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel for="radioActive" value="Ativo:" />
 					<p:selectOneRadio id="radioActive" styleClass="MyOneMenu"
-						value="#{controllerSignal.signalActive}" >
-						<f:selectItem itemValue="true" itemLabel="True"/>
-						<f:selectItem itemValue="false" itemLabel="False"/>
+						value="#{controllerSignal.signalActive}">
+						<f:selectItem itemValue="true" itemLabel="True" />
+						<f:selectItem itemValue="false" itemLabel="False" />
 					</p:selectOneRadio>
 				</h:panelGrid>
 			</div>
@@ -39,7 +40,8 @@
 				<h:outputLabel value="Group: " />
 				<p:selectOneMenu id="signalGroup" required="true"
 					requiredMessage="O grupo é obrigatório"
-					value="#{controllerSignal.groupId}" converter="javax.faces.Long" styleClass="MyOneMenu">
+					value="#{controllerSignal.groupId}" converter="javax.faces.Long"
+					styleClass="MyOneMenu">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="Selecione um grupo" />
 					<f:selectItems var="group" value="#{controllerSignal.signalGroups}"
@@ -57,7 +59,9 @@
 	<h:form id="saidaDados">
 
 		<p:dataTable value="#{controllerSignal.signals}" var="signal"
-			rendered="#{not empty controllerSignal.signals}" border="1">
+			rendered="#{not empty controllerSignal.signals}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">>
 			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Endereço" />

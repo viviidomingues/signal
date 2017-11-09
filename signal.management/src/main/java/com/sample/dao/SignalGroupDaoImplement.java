@@ -29,7 +29,7 @@ public class SignalGroupDaoImplement implements SignalGroupDao {
 	public static SignalGroupDaoImplement getInstance(){
 		return INSTANCE;
 	}
-
+	
 	@Override
 	public SignalGroup save(SignalGroup signalGroup) {
 		if(signalGroup != null){

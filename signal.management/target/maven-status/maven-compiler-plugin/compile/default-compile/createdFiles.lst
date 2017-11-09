@@ -1,4 +1,5 @@
 com\sample\controller\ControllerSignal.class
+com\sample\dao\BooleanTrueFalseConverter.class
 com\sample\dao\SignalGroupDaoImplement.class
 com\sample\model\Signal.class
 com\sample\model\SignalGroup.class

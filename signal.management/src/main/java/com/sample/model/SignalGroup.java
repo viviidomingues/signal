@@ -1,7 +1,7 @@
 package com.sample.model;
 
 public class SignalGroup {
-
+	
 	private Long id;
 	private String identifier;
 
